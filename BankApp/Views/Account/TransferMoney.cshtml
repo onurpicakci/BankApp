@@ -1,0 +1,37 @@
+@model Domain.Entity.Account
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<div class="row">
+    <div class="col-lg-6">
+        <h3 class="mb-4">Havale</h3>
+    </div>
+</div>
+
+<form asp-controller="Account" asp-action="TransferMoney" method="post" role="form">
+    <div class="mb-3">
+        <div class="form-group">
+            <label>Account Number</label>
+            @Html.DropDownListFor(model => model.AccountNumber, (SelectList)ViewBag.AccountNumbers, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="mb-3">
+        <div class="form-group">
+            <label>Destination Account Number</label>
+            <input class="form-control" type="text" asp-for="DestinationAccountNumber" placeholder="Destination Account Number"/>
+            <span class="text-danger" asp-validation-for="DestinationAccountNumber"></span>
+        </div>
+    </div>
+    <div class="mb-3">
+        <div class="form-group">
+            <label>Amount</label>
+            <input class="form-control" type="text" asp-for="Amount" placeholder="Amount"/>
+            <span class="text-danger" asp-validation-for="Amount"></span>
+        </div>
+    </div>
+
+    <button class="mt-3 btn btn-outline-warning" type="submit">Para Gönder</button>
+</form>

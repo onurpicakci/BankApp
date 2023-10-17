@@ -1,0 +1,35 @@
+@using Domain.Entity
+@model List<Customer>
+
+@{
+    ViewBag.Title = "Customer List";
+    Layout = "_Layout";
+}
+
+<h2>Customer List</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>TCKN</th>
+        <th>Name</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var customer in Model)
+    {
+        <tr>
+            <td>@customer.TCKN</td>
+            <td>@customer.Name</td>
+            <td>
+                <form asp-controller="CustomerLogin" asp-action="Index" method="post">
+                    <input type="hidden" name="tckn" value="@customer.TCKN"/>
+                    <input type="hidden" name="name" value="@customer.Name"/>
+                    <button type="submit" class="btn btn-success">Müşteri Oturumu Aç</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

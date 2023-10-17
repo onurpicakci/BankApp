@@ -1,0 +1,29 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <title>BankApp</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/layout-template/css/style.css">
+    <link rel="stylesheet" href="~/css/site.css"/>
+</head>
+<body>
+
+<div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar">
+        @await Component.InvokeAsync("Sidebar")
+    </nav>
+
+    <div id="content" class="p-4 p-md-5 pt-5">
+        @RenderBody()
+    </div>
+</div>
+
+<script src="~/layout-template/js/jquery.min.js"></script>
+<script src="~/layout-template/js/popper.js"></script>
+<script src="~/layout-template/js/bootstrap.min.js"></script>
+<script src="~/layout-template/js/main.js"></script>
+</body>
+</html>

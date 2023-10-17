@@ -1,0 +1,32 @@
+@using Domain.Entity
+@model Account
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+
+<div class="row">
+    <div class="col-lg-6">
+        <h3 class="mb-4">Para Çek</h3>
+    </div>
+</div>
+
+<form asp-controller="Account" asp-action="Withdraw" method="post" role="form">
+    <div class="mb-3">
+        <div class="form-group">
+            <label>Account Number</label>
+            @Html.DropDownListFor(model => model.AccountNumber, (SelectList)ViewBag.AccountNumbers, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="mb-3">
+        <div class="form-group">
+            <label>Amount</label>
+            <input class="form-control" type="text" asp-for="Amount" placeholder="Amount"/>
+            <span class="text-danger" asp-validation-for="Amount"></span>
+        </div>
+    </div>
+
+    <button class="mt-3 btn btn-outline-warning" type="submit">Para Çek</button>
+</form>

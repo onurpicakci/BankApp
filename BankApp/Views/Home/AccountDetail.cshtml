@@ -1,0 +1,52 @@
+@model AccountDetailViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+<div class="row">
+    <div class="card col-lg-8 border-warning" style="height: 35rem; float:none;margin:auto;">
+        <div class="card-body">
+            <h5 class="card-title">
+                Vakıfbank @(Model.Account.AccountType == 1 ? "Vadeli Hesap" : "Vadesiz Hesap")
+                TL
+            </h5>
+            <h5 class="card-title text-muted">@Model.Account.AccountNumber</h5>
+            <div class="my-container">
+                <p class="card-text mt-4">Hesap Bakiye: <span class="font-weight-bold ml-1">@Model.Account.Balance.ToString("F1") TL</span></p>
+            </div>
+            <div class="row">
+                <div class="ml-3 mt-4">
+                    <a href="/Account/Deposit" class="btn btn-warning ml-2" style="width: 200px">Para Yatır</a>
+                </div>
+                <div class="ml-4 mt-4">
+                    <a href="/Account/TransferMoney" class="btn btn-warning" style="width: 200px">Para Gönder</a>
+                </div>
+                <div class="ml-4 mt-4">
+                    <a href="/Account/Withdraw" class="btn btn-warning" style="width: 200px">Para Çek</a>
+                </div>
+                <h5 class="card-title mt-3 ml-3">Son 3 İşlem</h5>
+                <table class="table table-dark ml-3" style="width: 42rem">
+                    <thead>
+                    <tr>
+                        <th scope="col">İşlem</th>
+                        <th scope="col">Açıklama</th>
+                        <th scope="col">Tarih</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.AccountActivities)
+                    {
+                        <tr>
+                            <td>@item.ProcessName</td>
+                            <td>@item.Description</td>
+                            <td>@item.OperationDate</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+                <a href="/AccountActivities/@Model.Account.AccountNumber/1" class="btn btn-warning ml-3 mt-3 float-right" style="width: 200px">Tüm Hesap Dökümü</a>
+            </div>
+        </div>
+    </div>
+</div>

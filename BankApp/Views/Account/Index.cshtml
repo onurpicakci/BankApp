@@ -1,0 +1,36 @@
+@using Domain.Entity
+@model Account
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<div class="row">
+    <div class="col-lg-6">
+        <h3 class="mb-4">Yeni Hesap Oluştur</h3>
+    </div>
+</div>
+
+<form asp-controller="Account" asp-action="Index" method="post" role="form">
+    <div class="form-group">
+        <div class="mb-3">
+            <label>Customer No</label>
+            <input class="form-control" type="text" value="@ViewBag.CustomerNo" asp-for="CustomerNo" placeholder="Customer No"/>
+            <span class="text-danger" asp-validation-for="CustomerNo"></span>
+        </div>
+        <div class="mb-3">
+            <label>Balance</label>
+            <input class="form-control" type="text" asp-for="Balance" value="0" placeholder="Balance"/>
+            <span class="text-danger" asp-validation-for="Balance"></span>
+        </div>
+        <div class="mb-3">
+            <label>Account Type</label>
+            <select class="form-control" asp-for="AccountType">
+                <option value="1">Vadeli</option>
+                <option value="2">Vadesiz</option>
+            </select>
+            <span class="text-danger" asp-validation-for="AccountType"></span>
+        </div>
+    </div>
+    <button class="mt-3 btn btn-outline-warning" type="submit">Create Account</button>
+</form>

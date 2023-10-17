@@ -1,0 +1,43 @@
+@using Domain.Entity
+@model Customer?
+
+<div class="p-4 pt-5">
+    <h1>
+        <a href="/Home/Index" class="logo">Bank App</a>
+    </h1>
+    <h3>
+        <p class="text-white mt-4 mb-4">@Model?.Name @Model?.Surname</p>
+    </h3>
+    <ul class="list-unstyled components mb-5 mt-2">
+        @if (User.Identity.AuthenticationType == "Cookies")
+        {
+            <li>
+                <a href="/Home/Index">Anasayfa</a>
+            </li>
+            <li>
+                <a href="/Account/Deposit">Para Yatır</a>
+            </li>
+            <li>
+                <a href="/Account/TransferMoney">Havale</a>
+            </li>
+            <li>
+                <a href="/Account/Withdraw">Para Çek</a>
+            </li>
+            <li>
+                <a href="/Account?customerNo=@Model?.CustomerNo">Hesap Oluştur</a>
+            </li>
+            <li>
+                <a href="/CustomerLogin/Logout">Müşteri Oturum Kapat</a>
+            </li>
+        }
+        else
+        {
+            <li>
+                <a href="/Customer/Index">Müşteri Oluştur</a>
+            </li>
+            <li>
+                <a href="/CustomerList/Index">Müşteri Oturum Aç</a>
+            </li>
+        }
+    </ul>
+</div>

@@ -1,0 +1,31 @@
+@model Domain.Entity.Customer
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<div class="row">
+    <div class="col-lg-6">
+        <h3 class="mb-4">Giriş Yap</h3>
+    </div>
+</div>
+
+<form asp-controller="CustomerLogin" asp-action="Index" method="post" role="form">
+
+    <div class="form-group">
+        <div class="mb-3">
+            <label for="tckn">TCKN</label>
+            <input class="form-control" type="text" asp-for="TCKN" id="tckn" placeholder="TCKN"/>
+            <span class="text-danger" asp-validation-for="TCKN"></span>
+        </div>
+        <div class="mb-3">
+            <label>Name</label>
+            <input class="form-control" type="text" asp-for="Name" placeholder="Name"/>
+            <span class="text-danger" asp-validation-for="Name"></span>
+        </div>
+        <span class="text-danger">@ViewBag.Message</span>
+    </div>
+
+    <button class="mt-3 btn btn-outline-warning" type="submit">Giriş Yap</button>
+</form>

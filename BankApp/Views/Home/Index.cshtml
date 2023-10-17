@@ -1,0 +1,24 @@
+﻿@using Domain.Entity
+@model List<Account?>
+@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+
+<div class="row">
+    <div class="card border-warning col-lg-6" style="float:none;margin:auto;">
+        <div class="card-body">
+            <h5 class="card-title">Hesaplarım</h5>
+            @foreach (var item in Model)
+            {
+                <p class="card-title mt-4">
+                    Vakıfbank @(item.AccountType == 1 ? "Vadeli Hesap" : "Vadesiz Hesap")
+                    TL
+                    <a href="/Home/AccountDetail?accountNumber=@item.AccountNumber" class="btn btn-outline-warning float-right">Hesap Detay</a>
+                </p>
+                <p class="card-title text-muted">@item.AccountNumber</p>
+                <hr/>
+            }
+        </div>
+    </div>
+</div>
