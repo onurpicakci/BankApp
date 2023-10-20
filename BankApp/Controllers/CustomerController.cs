@@ -1,10 +1,12 @@
 using Application.Interfaces;
 using BankApp.KPSPublic;
 using Domain.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankApp.Controllers;
 
+[Authorize(AuthenticationSchemes = "YourUserAuthenticationScheme")]
 public class CustomerController : Controller
 {
     private readonly ICustomerService _customerService;

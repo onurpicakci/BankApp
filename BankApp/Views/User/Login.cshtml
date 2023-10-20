@@ -22,11 +22,15 @@
         </div>
         <div class="mb-3">
             <label>Password</label>
-            <input class="form-control" type="text" asp-for="Password" placeholder="Password"/>
-            <span class="text-danger" asp-validation-for="Password"></span>
+            <div class="input-group">
+                <input class="form-control" type="password" asp-for="Password" placeholder="Password"/>
+                <button class="btn btn-secondary password-visibility-button" type="button">
+                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                </button>
+                <span class="text-danger" asp-validation-for="Password"></span>
+            </div>
         </div>
     </div>
 
     <button class="mt-3 btn btn-outline-warning" type="submit">Giriş Yap</button>
 </form>
-

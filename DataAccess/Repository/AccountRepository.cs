@@ -164,6 +164,7 @@ public class AccountRepository : IAccountRepository
             }
         }
     }
+
     public async Task<Account> TransferMoneyAsync(string accountNumber, string destinationAccountNumber, decimal amount)
     {
         using (var connection = new SqlConnection(_context.Database.GetConnectionString()))
@@ -185,7 +186,7 @@ public class AccountRepository : IAccountRepository
 
                         await command.ExecuteNonQueryAsync();
                     }
-                    
+
                     using (var command = new SqlCommand())
                     {
                         command.Connection = connection;
@@ -197,6 +198,7 @@ public class AccountRepository : IAccountRepository
 
                         await command.ExecuteNonQueryAsync();
                     }
+
 
                     transaction.Commit();
 
@@ -214,13 +216,13 @@ public class AccountRepository : IAccountRepository
             }
         }
     }
-    
+
     public async Task<Account> WithdrawAsync(string accountNumber, decimal amount)
     {
         using (var connection = new SqlConnection(_context.Database.GetConnectionString()))
         {
             await connection.OpenAsync();
-            
+
             using (var transaction = connection.BeginTransaction())
             {
                 using (var command = new SqlCommand())
@@ -262,6 +264,45 @@ public class AccountRepository : IAccountRepository
             {
                 command.Connection = connection;
                 command.CommandText = "GetAccountsByCustomerNo";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@CustomerNo", customerNo);
+
+                await connection.OpenAsync();
+
+                var reader = await command.ExecuteReaderAsync();
+
+                if (!reader.HasRows)
+                {
+                    return null;
+                }
+
+                var accounts = new List<Account>();
+
+                while (await reader.ReadAsync())
+                {
+                    var account = new Account
+                    {
+                        AccountNumber = reader["AccountNumber"].ToString(),
+                        CustomerNo = reader["CustomerNo"].ToString(),
+                        Balance = Convert.ToDecimal(reader["Balance"]),
+                        AccountType = Convert.ToInt32(reader["AccountType"])
+                    };
+                    accounts.Add(account);
+                }
+
+                return accounts;
+            }
+        }
+    }
+
+    public async Task<List<Account>> GetAccountsByDifferentCustomerNoAsync(string customerNo)
+    {
+        using (var connection = new SqlConnection(_context.Database.GetConnectionString()))
+        {
+            using (var command = new SqlCommand())
+            {
+                command.Connection = connection;
+                command.CommandText = "GetAccountsByDifferentCustomerNo";
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@CustomerNo", customerNo);
 

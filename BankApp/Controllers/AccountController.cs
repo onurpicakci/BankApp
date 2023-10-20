@@ -77,6 +77,7 @@ public class AccountController : Controller
     public async Task<IActionResult> TransferMoney()
     {
         await GetAccountNumber();
+        await GetDestinationAccountNumber();
         return View();
     }
 
@@ -88,6 +89,7 @@ public class AccountController : Controller
         {
             ModelState.AddModelError("Amount", "Amount must be greater than 0");
             await GetAccountNumber();
+            await GetDestinationAccountNumber();
             return View();
         }
 
@@ -145,6 +147,21 @@ public class AccountController : Controller
         var accounts = await _accountService.GetAccountsByCustomerNoAsync(customerNo);
         accountNumbers = accounts.Select(x => x.AccountNumber).ToList();
         ViewBag.AccountNumbers = new SelectList(accountNumbers);
+    }
+    
+    public async Task GetDestinationAccountNumber()
+    {
+        List<string> destinationAccountNumbers;
+        var customerNo = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        if (customerNo == null)
+        {
+            return;
+        }
+
+        var accounts = await _accountService.GetAccountsByDifferentCustomerNoAsync(customerNo);
+        destinationAccountNumbers = accounts.Select(x => x.AccountNumber).ToList();
+        ViewBag.DifferentAccountNumbers = new SelectList(destinationAccountNumbers);
     }
 
     public async Task GetAccountBalance()

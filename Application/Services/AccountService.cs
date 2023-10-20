@@ -48,4 +48,9 @@ public class AccountService : IAccountService
     {
         return _accountRepository.GetAccountsByCustomerNoAsync(customerNo);
     }
+
+    public Task<List<Account>> GetAccountsByDifferentCustomerNoAsync(string customerNo)
+    {
+        return _accountRepository.GetAccountsByDifferentCustomerNoAsync(customerNo);
+    }
 }

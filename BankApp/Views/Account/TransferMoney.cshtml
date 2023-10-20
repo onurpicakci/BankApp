@@ -21,8 +21,7 @@
     <div class="mb-3">
         <div class="form-group">
             <label>Destination Account Number</label>
-            <input class="form-control" type="text" asp-for="DestinationAccountNumber" placeholder="Destination Account Number"/>
-            <span class="text-danger" asp-validation-for="DestinationAccountNumber"></span>
+            @Html.DropDownListFor(model => model.DestinationAccountNumber, (SelectList)ViewBag.DifferentAccountNumbers, new { @class = "form-control" })
         </div>
     </div>
     <div class="mb-3">

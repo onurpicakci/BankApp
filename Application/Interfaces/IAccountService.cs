@@ -17,4 +17,6 @@ public interface IAccountService
     Task<Account> WithdrawAsync(string accountNumber, decimal amount);
     
     Task<List<Account>> GetAccountsByCustomerNoAsync(string customerNo);
+    
+    Task<List<Account>> GetAccountsByDifferentCustomerNoAsync(string customerNo);
 }
