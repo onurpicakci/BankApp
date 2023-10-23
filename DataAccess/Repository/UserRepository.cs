@@ -21,7 +21,7 @@ public class UserRepository : IUserRepository
         using (var connection = new SqlConnection(_context.Database.GetConnectionString()))
         {
             await connection.OpenAsync();
-            
+
             using (var transaction = connection.BeginTransaction())
             {
                 using (var command = new SqlCommand())
@@ -46,7 +46,7 @@ public class UserRepository : IUserRepository
                     catch (Exception)
                     {
                         transaction.Rollback();
-                        throw; 
+                        throw;
                     }
                 }
             }
@@ -119,9 +119,6 @@ public class UserRepository : IUserRepository
                 connection.Close();
                 return null;
             }
-        }
-        {
-            
         }
     }
 }

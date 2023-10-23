@@ -52,13 +52,13 @@ public class UserController : Controller
 
         if (userFromDb == null)
         {
-            ViewBag.Message = "Kullanıcı bulunamadı.";
+            ModelState.AddModelError("Username", "Kullanıcı adı bulunamadı.");
             return RedirectToAction("AddUser", "User");
         }
 
         if (userFromDb.Username != user.Username || userFromDb.Password != user.Password)
         {
-            ViewBag.Message = "Hatalı kullanıcı adı veya şifre girdiniz.";
+            ModelState.AddModelError("Username", "Kullanıcı adı veya şifre hatalı.");
             return View();
         }
 
