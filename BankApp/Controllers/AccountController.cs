@@ -121,16 +121,16 @@ public class AccountController : Controller
             await GetAccountNumber();
             return View();
         }
-        
+
         var account = await _accountService.GetAccountByAccountNoAsync(accountNumber);
-        
+
         if (account.Balance < amount)
         {
             ModelState.AddModelError("Amount", "Amount must be less than balance");
             await GetAccountNumber();
             return View();
         }
-        
+
         try
         {
             await _accountService.WithdrawAsync(accountNumber, amount);
@@ -157,7 +157,7 @@ public class AccountController : Controller
         accountNumbers = accounts.Select(x => x.AccountNumber).ToList();
         ViewBag.AccountNumbers = new SelectList(accountNumbers);
     }
-    
+
     public async Task GetDestinationAccountNumber()
     {
         List<string> destinationAccountNumbers;
