@@ -163,11 +163,4 @@ public class AccountController : Controller
         destinationAccountNumbers = accounts.Select(x => x.AccountNumber).ToList();
         ViewBag.DifferentAccountNumbers = new SelectList(destinationAccountNumbers);
     }
-
-    public async Task GetAccountBalance()
-    {
-        var customerNo = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        var account = await _accountService.GetAccountNoByCustomerNoAsync(customerNo);
-        var balance = account.Balance;
-    }
 }

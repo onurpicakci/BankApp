@@ -12,7 +12,8 @@ public class HomeController : Controller
     private readonly IAccountService _accountService;
     private readonly IAccountActivitiesService _accountActivitiesService;
 
-    public HomeController(ILogger<HomeController> logger, IAccountService accountService, IAccountActivitiesService accountActivitiesService)
+    public HomeController(ILogger<HomeController> logger, IAccountService accountService,
+        IAccountActivitiesService accountActivitiesService)
     {
         _logger = logger;
         _accountService = accountService;
@@ -24,8 +25,8 @@ public class HomeController : Controller
     {
         var customerNo = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-        if (customerNo == null || 
-            (await _accountService.GetAccountNoByCustomerNoAsync(customerNo) is not { } account) || 
+        if (customerNo == null ||
+            (await _accountService.GetAccountNoByCustomerNoAsync(customerNo) is not { } account) ||
             (await _accountService.GetAccountsByCustomerNoAsync(account.CustomerNo) is not { } getAccount))
         {
             return RedirectToAction("Index", "CustomerList");
@@ -33,7 +34,7 @@ public class HomeController : Controller
 
         return View(getAccount.ToList());
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> AccountDetail(string accountNumber)
     {
@@ -41,27 +42,21 @@ public class HomeController : Controller
         {
             return RedirectToAction("Index", "Home");
         }
-        
+
         var account = await _accountService.GetAccountByAccountNoAsync(accountNumber);
-        
+
         if (account == null)
         {
             return RedirectToAction("Index", "Home");
         }
-        
+
         AccountDetailViewModel accountDetailViewModel = new()
         {
             Account = account,
             AccountActivities = await _accountActivitiesService.GetLastThreeActivitiesAsync(accountNumber)
         };
-        
+
         return View(accountDetailViewModel);
-    }
-
-
-    public IActionResult Privacy()
-    {
-        return View();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
