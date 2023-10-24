@@ -5,7 +5,6 @@ using DataAccess.Context;
 using DataAccess.Repository;
 using Domain.Entity;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 

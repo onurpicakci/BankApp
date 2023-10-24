@@ -32,7 +32,7 @@ public class CustomerController : Controller
                 ViewBag.Message = "TCKN ve bilgileriniz uyuşmuyor.";
                 return View();
             }
-            var customerNumber = await _customerService.AddCustomerAsync(customer);
+            await _customerService.AddCustomerAsync(customer);
             return RedirectToAction("Index", "Home");
         }
         catch (Exception e)

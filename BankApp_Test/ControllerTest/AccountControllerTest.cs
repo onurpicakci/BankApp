@@ -54,7 +54,7 @@ public class AccountControllerTest
         var controller = new AccountController(mockRepo.Object);
         var account = new Account
         {
-            CustomerNo = "000000000",
+            CustomerNo = "000000000135",
             Balance = 5,
             AccountType = 5,
         };
