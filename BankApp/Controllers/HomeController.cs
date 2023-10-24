@@ -8,14 +8,12 @@ namespace BankApp.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
     private readonly IAccountService _accountService;
     private readonly IAccountActivitiesService _accountActivitiesService;
 
-    public HomeController(ILogger<HomeController> logger, IAccountService accountService,
+    public HomeController(IAccountService accountService,
         IAccountActivitiesService accountActivitiesService)
     {
-        _logger = logger;
         _accountService = accountService;
         _accountActivitiesService = accountActivitiesService;
     }

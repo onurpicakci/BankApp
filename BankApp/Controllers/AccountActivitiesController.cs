@@ -8,13 +8,10 @@ namespace BankApp.Controllers;
 public class AccountActivitiesController : Controller
 {
     private readonly IAccountActivitiesService _accountActivitiesService;
-    private readonly IAccountService _accountService;
 
-    public AccountActivitiesController(IAccountActivitiesService accountActivitiesService,
-        IAccountService accountService)
+    public AccountActivitiesController(IAccountActivitiesService accountActivitiesService)
     {
         _accountActivitiesService = accountActivitiesService;
-        _accountService = accountService;
     }
 
     [Route("AccountActivities/{accountNumber}/{page?}")]
